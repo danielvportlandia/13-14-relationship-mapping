@@ -64,12 +64,12 @@ describe('/api/users', () => {
     test('POST - 409 due to duplicate name', () => {
       return createUserMock()
         .then((savedUser) => {
-          const mockCategory = {
+          const mockUser = {
             name: savedUser.name,
             location: savedUser.location,
           };
           return superagent.post(apiURL)
-            .send(mockCategory);
+            .send(mockUser);
         })
         .then(Promise.reject)
         .catch((error) => {
@@ -157,7 +157,7 @@ describe('/api/users', () => {
           expect(error.status).toEqual(404);
         });
     });
-    test('PUT - should respond with a 400 if invalid id.', () => {
+    test('PUT - should respond with a 400 if new property is invalid.', () => {
       return createUserMock()
         .then((userMock) => {
           return superagent.put(`${apiURL}/${userMock._id}`)
@@ -178,11 +178,11 @@ describe('/api/users', () => {
       };
       return createUserMock()
         .then((userMock) => {
-          const mockCategory = {
+          const mockUser = {
             name: firstMock.name,
           };
           return superagent.put(`${apiURL}/${userMock._id}`)
-            .send(mockCategory);
+            .send(mockUser);
         })
         /* This works because there will always be a valid response back from 
         a PUT as it returns the targed item's values whether the request was valid or not. */
