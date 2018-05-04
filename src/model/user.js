@@ -18,11 +18,14 @@ const userSchema = mongoose.Schema({
   tricepsRPM: {
     type: Number,
   },
-  // routines: [
-  //   {
-  //     type: mongoose.Schema.Types.ObjectId, ref: 'routine',
-  //   },
-  // ],
+  posts: [
+    {
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'post',
+    },
+  ],
+}, {
+  usePushEach: true,
 });
 
 export default mongoose.model('user', userSchema);
